@@ -4,13 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>WP&#39; | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="第十八届全国大学生信息安全竞赛暨第二届“长城杯”铁人三项赛初赛-pwn-avm WP当时没做出来，卡的点主要是以为找到和libc_base距离固定的地址，实际上不固定，导致本地时不时能跑通，远程始终失败。 断点设置在((void (__fastcall *)(_QWORD *, _BYTE *))funcs_1AAD[v2])(a1, s);即b *$rebase(0x1aad)，这样子方便确定每">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WP&#39;">
+<meta property="og:url" content="http://example.com/2025/01/17/WP/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第十八届全国大学生信息安全竞赛暨第二届“长城杯”铁人三项赛初赛-pwn-avm WP当时没做出来，卡的点主要是以为找到和libc_base距离固定的地址，实际上不固定，导致本地时不时能跑通，远程始终失败。 断点设置在((void (__fastcall *)(_QWORD *, _BYTE *))funcs_1AAD[v2])(a1, s);即b *$rebase(0x1aad)，这样子方便确定每">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-01-17T06:47:53.000Z">
+<meta property="article:modified_time" content="2025-01-17T06:48:34.331Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -67,9 +71,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-WP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-WP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/01/17/WP/" class="article-date">
   <time class="dt-published" datetime="2025-01-17T06:47:53.000Z" itemprop="datePublished">2025-01-17</time>
@@ -82,8 +84,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/01/17/WP/">WP&#39;</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      WP&#39;
     </h1>
   
 
@@ -111,225 +113,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-fix-pwn" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/01/06/fix-pwn/" class="article-date">
-  <time class="dt-published" datetime="2025-01-06T15:59:32.288Z" itemprop="datePublished">2025-01-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/01/06/fix-pwn/">fix-pwn</a>
-    </h1>
+    <a href="/2025/01/06/fix-pwn/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">fix-pwn</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>这是有关如何修复pwn题目的一个博客。</p>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://hello-ctf.com/HC_AWD/awd_pwn.exp/#pwn">https://hello-ctf.com/HC_AWD/awd_pwn.exp/#pwn</a></p>
-<p>类型：明确范围，逆转逻辑，严控时间，问题部分无差别清除、通解。</p>
-<h3 id="明确范围"><a href="#明确范围" class="headerlink" title="明确范围"></a>明确范围</h3><p>思路参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/705148718?utm_psn=178896319914142">2024全国大学生信息安全竞赛（ciscn）半决赛（华东北赛区）Pwn题解 - 知乎</a>（可惜他用这个思路失败了）</p>
-<p>例如修改可读文件长度，或者对于%s等未限制范围的内容用明确的范围进行替换如换为%20s</p>
-<h3 id="逆转逻辑"><a href="#逆转逻辑" class="headerlink" title="逆转逻辑"></a>逆转逻辑</h3><p>将逻辑进行逆转如特定情况不触发程序错误，逆转为特定情况还会触发程序错误。</p>
-<table>
-<thead>
-<tr>
-<th align="left">指令</th>
-<th align="left">机器码</th>
-<th align="left">指令</th>
-<th align="left">机器码</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">jmp</td>
-<td align="left">EB</td>
-<td align="left">jz</td>
-<td align="left">74</td>
-</tr>
-<tr>
-<td align="left">je</td>
-<td align="left">74</td>
-<td align="left">jne</td>
-<td align="left">75</td>
-</tr>
-<tr>
-<td align="left">jg</td>
-<td align="left">7F</td>
-<td align="left">jge</td>
-<td align="left">7D</td>
-</tr>
-<tr>
-<td align="left">jl</td>
-<td align="left">7C</td>
-<td align="left">jle</td>
-<td align="left">7E</td>
-</tr>
-<tr>
-<td align="left">ja</td>
-<td align="left">77</td>
-<td align="left">jae</td>
-<td align="left">73</td>
-</tr>
-<tr>
-<td align="left">jb</td>
-<td align="left">72</td>
-<td align="left">jbe</td>
-<td align="left">76</td>
-</tr>
-<tr>
-<td align="left">jna</td>
-<td align="left">76</td>
-<td align="left">jnb</td>
-<td align="left">73</td>
-</tr>
-<tr>
-<td align="left">jnae</td>
-<td align="left">72</td>
-<td align="left">jnc</td>
-<td align="left">73</td>
-</tr>
-<tr>
-<td align="left">jnb</td>
-<td align="left">73</td>
-<td align="left">jng</td>
-<td align="left">7E</td>
-</tr>
-<tr>
-<td align="left">jnge</td>
-<td align="left">7C</td>
-<td align="left">jnl</td>
-<td align="left">7D</td>
-</tr>
-</tbody></table>
-<h3 id="严控时间"><a href="#严控时间" class="headerlink" title="严控时间"></a>严控时间</h3><p>程序最开始的alarm(60)通常时间较长，可以测试进行一次操作的时间大概多久，比如5次操作需要2秒，正常程序运行需要几次操作，多留1次的时间大致就行，例如设置为alarm(3)，这样限制多次操作也能修复程序。</p>
-<h3 id="问题部分无差别清除"><a href="#问题部分无差别清除" class="headerlink" title="问题部分无差别清除"></a>问题部分无差别清除</h3><p>参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/705148718?utm_psn=178896319914142">2024全国大学生信息安全竞赛（ciscn）半决赛（华东北赛区）Pwn题解 - 知乎</a></p>
-<p>直接把有问题的函数整体nop掉，然后能调用这个函数相关逻辑也nop掉。</p>
-<h3 id="通解（-）"><a href="#通解（-）" class="headerlink" title="通解（*）"></a>通解（*）</h3><p>参考链接：<a target="_blank" rel="noopener" href="https://github.com/XueDugu/evilPatcher">XueDugu&#x2F;evilPatcher</a></p>
-<p>直接自动打补丁。</p>
-<p>使用方法</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seccomp-tools dump elf</span><br><span class="line">python evilPatch.py elf sandboxfile 1</span><br></pre></td></tr></table></figure>
-
-<p> 结果输出一个patch过后的文件，文件名为原来文件加上.patch后缀。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/01/06/fix-pwn/" data-id="cm5lee43e0001vobp1283fjmy" data-title="fix-pwn" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
-    <article id="post-Hello" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/01/03/Hello/" class="article-date">
-  <time class="dt-published" datetime="2025-01-02T18:53:38.000Z" itemprop="datePublished">2025-01-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/01/03/Hello/">&#39;Hello&#39;</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>第一个博客</p>
-<p>记录一下最近的生活和这学期的学习。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/01/03/Hello/" data-id="cm5lee43a0000vobp90yrf6qx" data-title="&#39;Hello&#39;" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/01/03/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2025-01-02T18:43:02.546Z" itemprop="datePublished">2025-01-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/01/03/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/01/03/hello-world/" data-id="cm5lee43f0002vobpa71w3ax3" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
